@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+ targetNamespace="http://www.invenireaude.org/qsystem/stats"
+ xmlns:tns="http://www.invenireaude.org/qsystem/stats">
+
+  <complexType name="Sample">
+	<attribute name="min"    type="integer" use="required" />
+	<attribute name="max"    type="integer" use="required" />
+	<attribute name="avg"    type="integer" use="required" />
+	<attribute name="total"  type="integer" use="required" />
+	<attribute name="num"    type="integer" use="required" />
+ </complexType>
+
+  <complexType name="MemorySlot">
+   		<sequence>
+   		  <element name="size"      type="integer" minOccurs="1" maxOccurs="1"/>
+   		  <element name="free"      type="integer" minOccurs="1" maxOccurs="1"/>
+   		  <element name="cfree"     type="integer" minOccurs="1" maxOccurs="1"/>
+   		  <element name="allocated" type="integer" minOccurs="1" maxOccurs="1"/>
+   		</sequence>
+   </complexType>
+
+  <complexType name="MemoryManager">
+   		<sequence>
+        <element name="entries"        type="integer" minOccurs="1" maxOccurs="1"/>
+        <element name="bucketSize"     type="integer" minOccurs="1" maxOccurs="1"/>
+
+        <element name="totalSize"        type="integer" minOccurs="1" maxOccurs="1"/>
+        <element name="totalAllocated"   type="integer" minOccurs="1" maxOccurs="1"/>
+        <element name="fragmentationPct" type="integer" minOccurs="1" maxOccurs="1"/>
+        <element name="allocated"        type="integer" minOccurs="1" maxOccurs="1"/>
+        <element name="allocatedSegments" type="integer" minOccurs="1" maxOccurs="1"/>
+        <element name="totalSegments"     type="integer" minOccurs="1" maxOccurs="1"/>
+        <element name="highWater"        type="integer" minOccurs="1" maxOccurs="1"/>
+
+   		  <element name="slots"          type="tns:MemorySlot" minOccurs="0" maxOccurs="unbounded"/>
+        <element name="allocations"    type="tns:Sample"  minOccurs="1" maxOccurs="1"/>
+        <element name="waits"          type="tns:Sample"  minOccurs="1" maxOccurs="1"/>
+        <element name="searches"       type="tns:Sample"  minOccurs="1" maxOccurs="1"/>
+        <element name="searchesNoSplit"      type="tns:Sample"  minOccurs="1" maxOccurs="1"/>
+   		</sequence>
+   </complexType>
+
+  <complexType name="MemoryStats">
+   		<sequence>
+        <element name="systemHeap"      type="tns:MemoryManager" minOccurs="1" maxOccurs="1"/>
+        <element name="queueData"       type="tns:MemoryManager" minOccurs="1" maxOccurs="1"/>
+        <element name="applicationData" type="tns:MemoryManager" minOccurs="1" maxOccurs="1"/>
+   		</sequence>
+   </complexType>
+
+   <complexType name="ObjectStats">
+   		<sequence>
+   		  <element name="name" type="string"/>
+   		  <element name="numMsgs"   type="integer" minOccurs="1" maxOccurs="1"/>
+   		  <element name="highWater" type="integer" minOccurs="1" maxOccurs="1"/>
+   		  <element name="size"      type="integer" minOccurs="1" maxOccurs="1"/>
+   		  <element name="handers"   type="integer" minOccurs="1" maxOccurs="1"/>
+   		  <element name="puts"  type="tns:Sample"  minOccurs="1" maxOccurs="1"/>
+   		  <element name="gets"  type="tns:Sample"  minOccurs="1" maxOccurs="1"/>
+   		  <element name="waits" type="tns:Sample"  minOccurs="1" maxOccurs="1"/>
+   		</sequence>
+   </complexType>
+
+   <complexType name="QueueStats">
+      <complexContent>
+         <extension base="tns:ObjectStats">
+            <sequence>
+			   <element name="storage"  type="string" minOccurs="1" maxOccurs="1"/>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+
+   <complexType name="TopicStats">
+      <complexContent>
+         <extension base="tns:ObjectStats">
+            <sequence>
+			   <element name="subscriptions"  type="string" minOccurs="0" maxOccurs="unbounded"/>
+            </sequence>
+         </extension>
+      </complexContent>
+   </complexType>
+
+  <complexType name="SystemStats">
+	 	<sequence>
+      <element name="memory"   type="tns:MemoryStats"  minOccurs="1" maxOccurs="1" />
+			<element name="queues"   type="tns:QueueStats"  minOccurs="0" maxOccurs="unbounded" />
+			<element name="topics"   type="tns:TopicStats"  minOccurs="0" maxOccurs="unbounded" />
+		</sequence>
+		<attribute name="name"            type="string"   use="required" />
+    <attribute name="registryAlias"   type="string"   use="required" />
+		<attribute name="generatedOn"     type="dateTime" use="required" />
+	</complexType>
+
+ <element name="systemStats" type="tns:SystemStats" />
+
+</schema>

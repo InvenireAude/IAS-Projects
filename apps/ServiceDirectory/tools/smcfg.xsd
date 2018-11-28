@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" 
+targetNamespace="http://www.invenireaude.org/sm/cfg" 
+xmlns:tns="http://www.invenireaude.org/sm/cfg">
+
+	<complexType name="ResourceGroupExe">
+		<sequence>
+			<element name="nice" type="integer" minOccurs="0" maxOccurs="1" />
+		</sequence>
+	</complexType>
+
+	<complexType name="ResourceGroupExeSudo">
+		<complexContent>
+			<extension base="tns:ResourceGroupExe">
+				<sequence>
+					<element name="user" type="string" minOccurs="0" maxOccurs="1" />
+				</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+
+	<complexType name="Variable">	     
+	    <attribute name="name" type="string" use="required"/>
+	    <attribute name="value" type="string" use="optional"/>
+	</complexType>
+
+	<complexType name="Environment">
+	  <sequence>
+	     <element name="vars" type="tns:Variable" minOccurs="0" maxOccurs="unbounded" />
+	  </sequence>
+	</complexType>
+		
+	<complexType name="ResourceGroup">
+		<sequence>
+			<element name="logDir"   type="string"               minOccurs="1" maxOccurs="1" />
+			<element name="count"    type="integer"              minOccurs="1" maxOccurs="1" />
+			<element name="exe"      type="tns:ResourceGroupExe" minOccurs="0" maxOccurs="1" />
+			<element name="env"      type="tns:Environment"      minOccurs="0" maxOccurs="1" />
+			<element name="restartInterval" type="integer"       minOccurs="0" maxOccurs="1" />
+		</sequence>
+		<attribute name="name" type="string" use="required" />
+		<attribute name="default" type="boolean"/>
+	</complexType>
+
+	<complexType name="Command">
+		<sequence>
+			<element name="exe" type="string" minOccurs="1" maxOccurs="1" />
+			<element name="args" type="string" minOccurs="0" maxOccurs="unbounded" />
+		</sequence>
+	</complexType>
+
+	<complexType name="GroupingAttribute">
+		<attribute name="name" type="string" />
+		<attribute name="value" type="string" />
+	</complexType>
+
+	<simpleType name="DesiredState">
+		<restriction base="string">
+			<enumeration value="Stopped" />
+			<enumeration value="Started" />
+		</restriction>
+	</simpleType>
+
+	<complexType name="Service">
+		<sequence>			
+			<element name="grpAttrs" type="tns:GroupingAttribute" minOccurs="0" maxOccurs="unbounded" />
+			<element name="startCmd" type="tns:Command" minOccurs="1" maxOccurs="1" />
+			<element name="stopCmd" type="tns:Command" minOccurs="0" maxOccurs="1" />			
+			<element name="resGrp" type="string" minOccurs="1" maxOccurs="unbounded" />
+			<!-- TODO retry -->
+		</sequence>
+		  <attribute name="name" type="string" use="required"/>
+	</complexType>
+
+	<complexType name="ServiceConfig">
+		<sequence>
+			<element name="services" type="tns:Service" minOccurs="0" maxOccurs="unbounded" />
+		</sequence>
+	</complexType>
+
+	<complexType name="DeploymentConfig">
+		<sequence>
+		    <element name="lckDir"    type="string"  minOccurs="1" maxOccurs="1" />
+		    <element name="refreshMS" type="integer" minOccurs="1" maxOccurs="1" />
+			<element name="resources" type="tns:ResourceGroup" minOccurs="0" maxOccurs="unbounded" />
+		</sequence>
+	</complexType>
+
+	<element name="serviceConfig" type="tns:ServiceConfig" />
+	<element name="deploymentConfig" type="tns:DeploymentConfig" />
+
+</schema>

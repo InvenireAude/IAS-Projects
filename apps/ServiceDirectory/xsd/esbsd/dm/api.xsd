@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsi:schema 
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema" 
+ targetNamespace="http://www.invenireaude.com/esbsd/dm/api"
+ xmlns:dm="http://www.invenireaude.com/esbsd/dm"
+ xmlns:api="http://www.invenireaude.com/esbsd/dm/api" 
+ xmlns:ti="http://www.invenireaude.org/qsystem/typeinfo">
+
+<xsi:import namespace="http://www.invenireaude.org/qsystem/typeinfo" 
+ schemaLocation="../qsystem.typeinfo.xsd"/> 		 		
+
+   <xsi:complexType name="TypeInfoSelector">
+      <xsi:sequence>
+         <xsi:element name="typeName"       type="xsi:string"   minOccurs="0" maxOccurs="1"/>         
+         <xsi:element name="typeNamespace"  type="xsi:string"   minOccurs="0" maxOccurs="1"/>
+         
+         <xsi:element name="directExtensions"  type="xsi:boolean"   minOccurs="0" maxOccurs="1"/>
+         <xsi:element name="allExtensions"     type="xsi:boolean"   minOccurs="0" maxOccurs="1"/>
+         <xsi:element name="references"        type="xsi:boolean"   minOccurs="0" maxOccurs="1"/>
+         
+      </xsi:sequence>
+   </xsi:complexType>
+
+   <xsi:complexType name="GetTypeInfo">
+      <xsi:sequence>
+         <xsi:element name="selector"  type="api:TypeInfoSelector"   minOccurs="1" maxOccurs="1"/>         
+         <xsi:element name="response"  type="ti:TypeInfo"            minOccurs="0" maxOccurs="1"/>
+      </xsi:sequence>
+   </xsi:complexType>
+
+   <xsi:complexType name="TypesSelector">
+      <xsi:sequence>
+         <xsi:element name="typeNamespace"  type="xsi:string"   minOccurs="0" maxOccurs="1"/>
+      </xsi:sequence>
+   </xsi:complexType>
+
+
+   <xsi:complexType name="GetTypes">
+      <xsi:sequence>
+         <xsi:element name="selector"  type="api:TypesSelector"   minOccurs="1" maxOccurs="1"/>         
+         <xsi:element name="types"     type="ti:TypeInfo"         minOccurs="0" maxOccurs="unbounded"/>
+      </xsi:sequence>
+   </xsi:complexType>
+
+   <xsi:complexType name="GetNamespaces">
+      <xsi:sequence>
+         <xsi:element name="selector"   type="api:TypesSelector"   minOccurs="1" maxOccurs="1"/>         
+         <xsi:element name="namespaces" type="xsi:string"         minOccurs="0" maxOccurs="unbounded"/>
+      </xsi:sequence>
+   </xsi:complexType>
+
+   <xsi:complexType name="ProgramSelector">
+      <xsi:sequence>
+         <xsi:element name="name"  type="xsi:string"   minOccurs="0" maxOccurs="1"/>
+      </xsi:sequence>
+   </xsi:complexType>
+  
+   <xsi:complexType name="GetProgram">
+      <xsi:sequence>
+         <xsi:element name="selector"   type="api:ProgramSelector"   minOccurs="1" maxOccurs="1"/>         
+         <xsi:element name="programs"   type="ti:Program"            minOccurs="0" maxOccurs="unbounded"/>
+      </xsi:sequence>
+   </xsi:complexType>
+   
+</xsi:schema>
+

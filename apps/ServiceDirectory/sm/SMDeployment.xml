@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ns0:deploymentConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ns0="http://www.invenireaude.org/sm/cfg"
+	xsi:type="ns0:DeploymentConfig"
+	xsi:schemaLocation="http://www.invenireaude.org/sm/cfg
+	../../../../../IAS/IAS-ServiceManagerLib/xsd/smcfg.xsd">
+
+	<lckDir>${IAS_SM_RUNTIME}/locks</lckDir>
+
+	<refreshMS>1000</refreshMS>
+
+	<resources name="rg.ias.servicedirectory.web">
+		<logDir>${IAS_SM_RUNTIME}/logs</logDir>
+		<count>1</count>
+		<exe xsi:type="ns0:ResourceGroupExe"/>
+		 <env>
+		   <vars name="PWD" value="${IAS_PROJECTS}/apps/ServiceDirectory"/>
+		</env>
+	</resources>
+
+	<resources name="rg.ias.servicedirectory.api">
+		<logDir>${IAS_SM_RUNTIME}/logs</logDir>
+		<count>1</count>
+		<exe xsi:type="ns0:ResourceGroupExe"/>
+		 <env>
+		   <vars name="PWD" value="${IAS_PROJECTS}/apps/ServiceDirectory"/>
+		   <vars name="IAS_LANG_SRC_DIRS" value="${IAS_LANG_SRC_DIRS_WEBBROWSE}"/>
+		</env>
+	</resources>
+
+
+<resources name="rg.ias.servicedirectory.tester.api">
+		<logDir>${IAS_SM_RUNTIME}/logs</logDir>
+		<count>1</count>
+		<exe xsi:type="ns0:ResourceGroupExe"/>
+		 <env>
+		   <vars name="PWD" value="${IAS_PROJECTS}/apps/ServiceDirectory"/>
+		</env>
+	</resources>
+
+<resources name="rg.ias.servicedirectory.svc.job">
+		<logDir>${IAS_SM_RUNTIME}/logs</logDir>
+		<count>1</count>
+		<exe xsi:type="ns0:ResourceGroupExe"/>
+		 <env>
+		   <vars name="PWD" value="${IAS_PROJECTS}/apps/ServiceDirectory"/>
+		</env>
+	</resources>
+
+
+</ns0:deploymentConfig>

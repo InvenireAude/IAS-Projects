@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsi:schema 
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema" 
+ targetNamespace="http://www.invenireaude.com/esbsd/esb/api"
+ xmlns:esbsd="http://www.invenireaude.com/esbsd"
+ xmlns:api="http://www.invenireaude.com/esbsd/esb/api">
+
+<xsi:import namespace="http://www.invenireaude.com/esbsd" schemaLocation="../esbsd.xsd"/>	 		
+
+   <xsi:complexType name="ApplicationsSelector">
+      <xsi:sequence>
+         <xsi:element name="id"  type="esbsd:ApplicationId"   minOccurs="0" maxOccurs="1"/>
+      </xsi:sequence>
+   </xsi:complexType>
+  
+   <xsi:complexType name="GetApplications">
+      <xsi:sequence>
+         <xsi:element name="selector"      type="api:ApplicationsSelector"   minOccurs="1" maxOccurs="1"/>         
+         <xsi:element name="applications"   type="esbsd:Application"          minOccurs="0" maxOccurs="unbounded"/>
+      </xsi:sequence>
+   </xsi:complexType>
+   
+      <xsi:complexType name="InterfacesSelector">
+      <xsi:sequence>
+         <xsi:element name="id"  type="xsi:string"   minOccurs="0" maxOccurs="1"/>
+      </xsi:sequence>
+   </xsi:complexType>
+  
+   <xsi:complexType name="GetInterfaces">
+      <xsi:sequence>
+         <xsi:element name="selector"      type="api:InterfacesSelector"   minOccurs="1" maxOccurs="1"/>         
+         <xsi:element name="interfaces"    type="esbsd:Interface"          minOccurs="0" maxOccurs="unbounded"/>
+      </xsi:sequence>
+   </xsi:complexType>
+   
+   <xsi:element name="getApplications"      type="api:GetApplications"/> 
+   <xsi:element name="getInterfaces"        type="api:GetInterfaces"/> 
+    
+</xsi:schema>
+

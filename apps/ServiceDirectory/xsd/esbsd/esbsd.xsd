@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsi:schema 
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema" 
+ targetNamespace="http://www.invenireaude.com/esbsd"
+ xmlns:esbsd="http://www.invenireaude.com/esbsd">
+
+   <xsi:simpleType name="ApplicationId">
+     <xsi:restriction base="xsi:string">
+     </xsi:restriction>
+   </xsi:simpleType>
+
+   <xsi:simpleType name="InterfaceId">
+     <xsi:restriction base="xsi:string">
+     </xsi:restriction>
+   </xsi:simpleType>
+  
+   <xsi:simpleType name="InterfaceMode">
+     <xsi:restriction base="xsi:string">
+       <xsi:enumeration value="ClientServer"/>
+       <xsi:enumeration value="SendOnly"/>
+     </xsi:restriction>
+   </xsi:simpleType>
+
+ <xsi:simpleType name="MonitoringMode">
+     <xsi:restriction base="xsi:string">
+       <xsi:enumeration value="FULL"/>
+       <xsi:enumeration value="HEADER"/>
+       <xsi:enumeration value="NONE"/>
+     </xsi:restriction>
+   </xsi:simpleType>
+
+    
+   <xsi:complexType name="Interface">
+      <xsi:sequence>
+      </xsi:sequence>
+      <xsi:attribute name="id"              type="esbsd:InterfaceId"    />       
+   </xsi:complexType>
+
+  <xsi:complexType name="Property">
+      <xsi:sequence>
+      </xsi:sequence>
+      <xsi:attribute name="name"           type="xsi:string"    />       
+      <xsi:attribute name="value"          type="xsi:string"    />       
+   </xsi:complexType>
+
+   <xsi:complexType name="Service">
+      <xsi:sequence>
+      </xsi:sequence>
+      <xsi:attribute name="name"              type="xsi:string"/>       
+   </xsi:complexType>
+
+ 
+   <xsi:complexType name="ServiceUsage">
+      <xsi:complexContent>
+ 			<xsi:extension base="esbsd:Service">
+ 			<xsi:attribute name="monitorRequest"   type="esbsd:MonitoringMode"/> 
+ 			<xsi:attribute name="monitorResponse"  type="esbsd:MonitoringMode"/> 
+ 	  </xsi:extension>
+ 	  </xsi:complexContent>
+   </xsi:complexType>
+
+   <xsi:complexType name="ServiceEnablement">
+      <xsi:complexContent>
+ 			<xsi:extension base="esbsd:Service">
+ 	  </xsi:extension>
+ 	  </xsi:complexContent>
+   </xsi:complexType>
+
+   <xsi:complexType name="Location">
+	   <xsi:sequence>
+	   </xsi:sequence>		       
+ 	   <xsi:attribute name="connectionAlias"   type="xsi:string"/> 
+   </xsi:complexType>
+
+   <xsi:complexType name="Deployment">
+	   <xsi:sequence>
+		    <xsi:element name="location"   type="esbsd:Location"     minOccurs="0" maxOccurs="1"/>
+	   </xsi:sequence>		       
+   </xsi:complexType>
+                
+   <xsi:complexType name="InterfaceDefinition">
+		<xsi:complexContent>
+ 			<xsi:extension base="esbsd:Interface">
+	   		   <xsi:sequence>
+		         <xsi:element name="fullName"       type="xsi:string"     minOccurs="0" maxOccurs="1"/>     
+		         <xsi:element name="namespace"      type="xsi:string"     minOccurs="1" maxOccurs="1"/>      
+		         <xsi:element name="mode"           type="esbsd:InterfaceMode"     minOccurs="1" maxOccurs="1"/>      
+		         <xsi:element name="documentation"  type="xsi:string"     minOccurs="1" maxOccurs="1"/>
+		         
+		          <xsi:element name="properties"    type="esbsd:Property"   minOccurs="0" maxOccurs="unbounded"/>
+
+      		   </xsi:sequence>
+      		</xsi:extension>
+      </xsi:complexContent>
+   </xsi:complexType>
+
+   <xsi:complexType name="InterfaceInstance">
+ 		<xsi:complexContent>
+ 			<xsi:extension base="esbsd:Interface">
+	   		   <xsi:sequence>
+	   		     <xsi:element name="deployment"    type="esbsd:Deployment"   minOccurs="0" maxOccurs="1"/>
+ 		         <xsi:element name="properties"    type="esbsd:Property"   minOccurs="0" maxOccurs="unbounded"/>
+      		   </xsi:sequence>
+      		</xsi:extension>
+      </xsi:complexContent>
+   </xsi:complexType>
+
+   <xsi:complexType name="ClientInterface">
+ 		<xsi:complexContent>
+ 			<xsi:extension base="esbsd:InterfaceInstance">
+ 				<xsi:sequence>
+         	 	 <xsi:element name="services"      type="esbsd:ServiceUsage"       minOccurs="0" maxOccurs="unbounded"/>
+         	 	</xsi:sequence>          
+      		</xsi:extension>
+      </xsi:complexContent>
+   </xsi:complexType>
+
+   <xsi:complexType name="ServerInterface">
+ 		<xsi:complexContent>
+ 			<xsi:extension base="esbsd:InterfaceInstance">
+ 			  <xsi:sequence>
+ 				<xsi:element name="services"      type="esbsd:ServiceEnablement"       minOccurs="0" maxOccurs="unbounded"/>    
+ 			  </xsi:sequence>     
+      		</xsi:extension>
+      </xsi:complexContent>
+   </xsi:complexType>
+   
+   <xsi:complexType name="Application">
+      <xsi:sequence>
+         <xsi:element name="fullName"            type="xsi:string"          			minOccurs="1" maxOccurs="1"/>         
+         <xsi:element name="interfaceInstances"  type="esbsd:InterfaceInstance"         minOccurs="0" maxOccurs="unbounded"/>          
+      </xsi:sequence>
+      <xsi:attribute name="id"              type="esbsd:ApplicationId"    />       
+   </xsi:complexType>
+   
+   <xsi:element name="application"           type="esbsd:Application"/>
+   <xsi:element name="interfaceDefinition"   type="esbsd:InterfaceDefinition"/>
+       
+</xsi:schema>
+

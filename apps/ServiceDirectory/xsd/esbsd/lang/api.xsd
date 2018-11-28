@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsi:schema 
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema" 
+ targetNamespace="http://www.invenireaude.com/esbsd/lang/api"
+ xmlns:lang="http://www.invenireaude.com/esbsd/lang"
+ xmlns:api="http://www.invenireaude.com/esbsd/lang/api" 
+ xmlns:ti="http://www.invenireaude.org/qsystem/typeinfo">
+
+<xsi:import namespace="http://www.invenireaude.org/qsystem/typeinfo" 
+ schemaLocation="../qsystem.typeinfo.xsd"/> 		 		
+
+   <xsi:complexType name="ProgramSelector">
+      <xsi:sequence>
+         <xsi:element name="name"  type="xsi:string"   minOccurs="0" maxOccurs="1"/>
+      </xsi:sequence>
+   </xsi:complexType>
+  
+   <xsi:complexType name="GetPrograms">
+      <xsi:sequence>
+         <xsi:element name="selector"   type="api:ProgramSelector"   minOccurs="1" maxOccurs="1"/>         
+         <xsi:element name="programs"   type="ti:Program"            minOccurs="0" maxOccurs="unbounded"/>
+      </xsi:sequence>
+   </xsi:complexType>
+   
+</xsi:schema>
+

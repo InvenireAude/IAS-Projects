@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsi:schema  
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema"
+ targetNamespace="http://www.invenireaude.org/qsystem/typeinfo"
+ xmlns:ti="http://www.invenireaude.org/qsystem/typeinfo">
+	
+<xsi:complexType name="TypeInfo">
+	<xsi:attribute name="name"      type="xsi:string" use="required" />	
+	<xsi:attribute name="namespace" type="xsi:string" use="required" />
+</xsi:complexType>	
+
+<xsi:complexType name="TypeBase">
+	<xsi:complexContent>
+	   <xsi:extension base="ti:TypeInfo">
+	     <xsi:sequence>
+	   	 	<xsi:element name="base"              type="ti:TypeInfo" minOccurs="0" maxOccurs="1"/>	   	 	
+	   	 	<xsi:element name="description"       type="xsi:string"  minOccurs="0" maxOccurs="1"/>
+	   	 	<xsi:element name="directExtensions"  type="ti:TypeInfo" minOccurs="0" maxOccurs="unbounded"/>	 	   	 	
+	   	 	<xsi:element name="allExtensions"     type="ti:TypeInfo" minOccurs="0" maxOccurs="unbounded"/>	 	   	 	
+	   	 	<xsi:element name="references"        type="ti:TypeInfo" minOccurs="0" maxOccurs="unbounded"/>
+	   	 </xsi:sequence>
+  	  </xsi:extension>   		    	
+  	</xsi:complexContent>	
+</xsi:complexType>	
+
+<xsi:complexType name="Property">
+	<xsi:attribute name="name"              type="xsi:string"  use="required" />	
+	<xsi:attribute name="typeName"          type="xsi:string"  use="required" />
+	<xsi:attribute name="typeNamespace"     type="xsi:string"  use="required" />
+	<xsi:attribute name="isList"            type="xsi:boolean" use="required" />
+	<xsi:attribute name="isXMLAttribute"    type="xsi:boolean" use="optional" />
+	<xsi:attribute name="description"       type="xsi:string"  use="required" />		
+</xsi:complexType>	
+
+<xsi:complexType name="Object">
+	<xsi:complexContent>
+	   <xsi:extension base="ti:TypeBase">
+	   	 <xsi:sequence>
+	   	 	<xsi:element name="properties" type="ti:Property" minOccurs="0" maxOccurs="unbounded"/>	   	 	
+	   	 </xsi:sequence>
+  	  </xsi:extension>   		    
+  	</xsi:complexContent>     
+</xsi:complexType>  	
+
+<xsi:complexType name="SimpleType">
+	<xsi:complexContent>
+	   <xsi:extension base="ti:TypeBase">
+  	  </xsi:extension>   		    
+  	</xsi:complexContent>     
+</xsi:complexType>
+ 
+<xsi:complexType name="Variable">
+	<xsi:attribute name="name"              type="xsi:string"  use="required" />	
+	<xsi:attribute name="typeName"          type="xsi:string"  use="required" />
+	<xsi:attribute name="typeNamespace"     type="xsi:string"  use="required" />
+	<xsi:attribute name="isList"            type="xsi:boolean" use="required" />
+</xsi:complexType>
+
+<xsi:complexType name="SourceLocation">
+	<xsi:attribute name="file"          type="xsi:string"  use="required" />	
+	<xsi:attribute name="line"          type="xsi:integer"  use="required" />
+</xsi:complexType>
+
+
+<xsi:complexType name="Program">
+   	 <xsi:sequence>
+	   	    <xsi:element name="name"     type="xsi:string"  minOccurs="0" maxOccurs="1"/>
+	   	 	<xsi:element name="result"   type="ti:Variable" minOccurs="0" maxOccurs="1"/>
+	   	 	<xsi:element name="args"     type="ti:Variable" minOccurs="0" maxOccurs="unbounded"/>	   	 	
+	   	 	<xsi:element name="location" type="ti:SourceLocation"  minOccurs="0" maxOccurs="1"/>
+	   	 	<xsi:element name="source"   type="xsi:string"  minOccurs="0" maxOccurs="1"/>
+   	 </xsi:sequence>
+</xsi:complexType>	
+ 	
+ </xsi:schema>

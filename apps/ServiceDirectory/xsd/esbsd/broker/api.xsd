@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsi:schema
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema"
+ targetNamespace="http://www.invenireaude.com/esbsd/broker/api"
+ xmlns:ec="http://www.invenireaude.org/qsystem/workers/ec"
+ xmlns:api="http://www.invenireaude.com/esbsd/broker/api">
+
+<xsi:import namespace="http://www.invenireaude.org/qsystem/workers/ec" schemaLocation="../qsystem.workers.ec.xsd"/>
+
+   <xsi:complexType name="GetBrokerStats">
+      <xsi:sequence>
+         <xsi:element name="records"    type="ec:Record"          minOccurs="0" maxOccurs="unbounded"/>
+      </xsi:sequence>
+   </xsi:complexType>
+
+</xsi:schema>
+

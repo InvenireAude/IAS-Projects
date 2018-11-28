@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="ASCII"?>
+<ns0:serviceConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:ns0="http://www.invenireaude.org/sm/cfg"
+	xsi:type="ns0:ServiceConfig"
+	xsi:schemaLocation="http://www.invenireaude.org/sm/cfg
+	../../../../../IAS/IAS-ServiceManagerLib/xsd/smcfg.xsd">
+
+   <services name="ias.servicedirectory.api">
+	   <grpAttrs name="type" value="api" />
+	   <grpAttrs name="mon"  value="yes" />
+	   <grpAttrs name="appl"  value="ias.sd" />
+	   <startCmd>
+			<exe>bin/fcgi_processor.sh</exe>
+			<args>esbsd.api.inquiry</args>
+			<args>-f</args>
+			<args>svc/FRONT.INQUIRY.qs.xml</args>
+			<args>-T</args>
+			<args>1</args>
+		</startCmd>
+		<resGrp>rg.ias.servicedirectory.api</resGrp>
+   </services>
+
+  <services name="ias.servicedirectory.web">
+	   <grpAttrs name="type"  value="api" />
+	   <grpAttrs name="mon"   value="yes" />
+	   <grpAttrs name="appl"  value="ias.sd" />
+	   <startCmd>
+			<exe>lighttpd</exe>
+			<args>-Df</args>
+			<args>lighttpd/lighttpd.cfg</args>
+		</startCmd>
+		<resGrp>rg.ias.servicedirectory.web</resGrp>
+   </services>
+
+   <services name="ias.servicedirectory.tester">
+	   <grpAttrs name="type" value="api" />
+	   <grpAttrs name="mon"  value="yes" />
+	   <grpAttrs name="appl" value="ias.tester" />
+	   <startCmd>
+			<exe>bin/fcgi_processor.sh</exe>
+			<args>esbsd.api.tester</args>
+			<args>-f</args>
+			<args>svc/tester.qs.xml</args>
+			<args>-T</args>
+			<args>1</args>
+		</startCmd>
+		<resGrp>rg.ias.servicedirectory.tester.api</resGrp>
+   </services>
+
+ <services name="ias.servicedirectory.svc.job">
+	   <grpAttrs name="type" value="svc" />
+	   <grpAttrs name="mon"  value="yes" />
+	   <grpAttrs name="appl" value="ias.sd" />
+	   <startCmd>
+			<exe>ias_qs_processor</exe>
+			<args>-f</args>
+			<args>svc/svc.JOB.qs.xml</args>
+			<args>-T</args>
+			<args>1</args>
+		</startCmd>
+		<resGrp>rg.ias.servicedirectory.svc.job</resGrp>
+   </services>
+
+
+</ns0:serviceConfig>
+

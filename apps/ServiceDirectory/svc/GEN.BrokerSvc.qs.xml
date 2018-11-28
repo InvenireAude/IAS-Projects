@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spec:specification
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:spec="http://www.invenireaude.org/qsystem/workers/spec"
+  xmlns:io="http://www.invenireaude.org/qsystem/workers/io"
+  xmlns:logic="http://www.invenireaude.org/qsystem/workers/logic"
+  xsi:type="spec:Specification">
+
+   <inputSpec>
+     <inputs xsi:type="io:BrowserInput"
+     			inputName="input">
+       <connection>
+       	<protocol>timer</protocol>
+         <host>localhost</host>
+       </connection>
+       <destination>clock</destination>
+       <txnMode>NONTXN</txnMode>
+       <timeout>0</timeout>
+	 </inputs>
+
+     <inputs xsi:type="io:BrowserInput"
+     			inputName="dummy">
+       <connection>
+       	<protocol>timer</protocol>
+         <host>localhost</host>
+       </connection>
+       <destination>never</destination>
+       <txnMode>NONTXN</txnMode>
+       <timeout>-1</timeout>
+	 </inputs>
+
+     <inputs xsi:type="io:BrowserInput"
+     			inputName="esbsd.apps"
+     			autoRecycle="next">
+       <connection>
+         <protocol>dir</protocol>
+         <host>localhost</host>
+       </connection>
+       <destination>${IAS_ESBSD}/apps</destination>
+       <txnMode>TXN</txnMode>
+       <timeout>0</timeout>
+	 </inputs>
+
+    <inputs xsi:type="io:BrowserInput"
+     			inputName="esbsd.ints"
+     			autoRecycle="next">
+       <connection>
+         <protocol>dir</protocol>
+         <host>localhost</host>
+       </connection>
+       <destination>${IAS_ESBSD}/interfaces</destination>
+       <txnMode>NONTXN</txnMode>
+       <timeout>0</timeout>
+	 </inputs>
+
+  </inputSpec>
+
+  <outputSpec>
+
+  	   <outputs xsi:type="io:ProducerOutput" outputName="output">
+        <connection>
+         <protocol>dir</protocol>
+         <host>localhost</host>
+       </connection>
+       <destination>${IAS_ESBSD_AUTOGEN}/broker/svc/esb/${MID}</destination>
+       <txnMode>NONTXN</txnMode>
+       <attrUpdates name="FMT" value="XML" override="true" />
+	 </outputs>
+
+	  <outputs xsi:type="io:ProducerOutput" outputName="output.sm">
+        <connection>
+         <protocol>file</protocol>
+         <host>localhost</host>
+       </connection>
+       <destination>${IAS_ESBSD_AUTOGEN}/broker/sm/SMServices.xml</destination>
+       <txnMode>NONTXN</txnMode>
+       <attrUpdates name="FMT" value="XML" override="true" />
+       <attrUpdates name="XMLfName" value="GeneratedConfig" override="true" />
+	 </outputs>
+
+     <outputs xsi:type="io:ProducerOutput" outputName="error">
+        <connection>
+         <protocol>file</protocol>
+         <host>localhost</host>
+       </connection>
+       <destination>stdout_fmt</destination>
+       <txnMode>NONTXN</txnMode>
+	 </outputs>
+
+  </outputSpec>
+
+  <logicSpec>
+    <logics xsi:type="logic:RunExecute">
+       <load>ias::esbsd::gen::generateBrokerSvc</load>
+    </logics>
+  </logicSpec>
+
+</spec:specification>

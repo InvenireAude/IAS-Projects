@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsi:schema
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema"
+ targetNamespace="http://www.invenireaude.com/esbsd/qs/api"
+ xmlns:qs="http://www.invenireaude.com/esbsd/qs"
+ xmlns:api="http://www.invenireaude.com/esbsd/qs/api"
+ xmlns:st="http://www.invenireaude.org/qsystem/stats">
+
+<xsi:import namespace="http://www.invenireaude.org/qsystem/stats"
+ schemaLocation="../qsystem.stats.xsd"/>
+
+   <xsi:complexType name="GetStatistics">
+      <xsi:sequence>
+         <xsi:element name="systemStats"   type="st:SystemStats" minOccurs="0" maxOccurs="1"/>
+      </xsi:sequence>
+   </xsi:complexType>
+
+</xsi:schema>
+

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" 
+ targetNamespace="http://www.invenireaude.org/sm/api" 
+  xmlns:cfg="http://www.invenireaude.org/sm/cfg"
+  xmlns:tns="http://www.invenireaude.org/sm/api">
+
+	<import namespace="http://www.invenireaude.org/sm/cfg" schemaLocation="smcfg.xsd"/>
+	
+	<complexType name="ServiceCall">
+	</complexType>
+	
+	
+	 <simpleType name="InstanceStatus">
+             <restriction base="string"/>
+      </simpleType>
+      
+	<complexType name="GrpAttrPair">
+		<sequence>
+			<element name="name"     type="string" minOccurs="1" maxOccurs="1" />
+			<element name="value"    type="string" minOccurs="1" maxOccurs="1" />			
+		</sequence>
+	</complexType>
+	
+	<complexType name="GrpAttrPairList">
+		<sequence>
+			<element name="pairs" type="tns:GrpAttrPair" minOccurs="0" maxOccurs="unbounded" />					
+		</sequence>
+	</complexType>
+	
+		
+	<complexType name="ServiceStatus">
+		<sequence>
+			<element name="name"     type="string" minOccurs="1" maxOccurs="1" />
+			<element name="statuses" type="tns:InstanceStatus" minOccurs="0" maxOccurs="unbounded" />
+		</sequence>
+	</complexType>
+	
+	<complexType name="ServiceStatusRequest">
+		<sequence>
+			<element name="selector" type="tns:GrpAttrPairList" minOccurs="0" maxOccurs="1" />
+		</sequence>
+	</complexType>
+
+	<complexType name="ServiceStatusResponse">
+		<sequence>
+			<element name="services" type="tns:ServiceStatus" minOccurs="0" maxOccurs="unbounded" />
+		</sequence>
+	</complexType>
+	
+	<complexType name="ServiceStatusCall">
+		<complexContent>
+			<extension base="tns:ServiceCall">
+			<sequence>
+				<element name="request"  type="tns:ServiceStatusRequest" minOccurs="0" maxOccurs="1" />
+				<element name="response" type="tns:ServiceStatusResponse" minOccurs="0" maxOccurs="1" />
+			</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+
+	<complexType name="ServiceConfigRequest">
+		<sequence>
+			<element name="nice" type="integer" minOccurs="0" maxOccurs="1" />
+		</sequence>
+	</complexType>
+
+	<complexType name="ServiceConfigResponse">
+		<sequence>
+			<element name="service"    type="cfg:ServiceConfig"    minOccurs="0" maxOccurs="1" />
+			<element name="deployment" type="cfg:DeploymentConfig" minOccurs="0" maxOccurs="1" />
+		</sequence>
+	</complexType>
+	
+	<complexType name="ServiceConfigCall">
+		<complexContent>
+			<extension base="tns:ServiceCall">
+			<sequence>
+				<element name="request"  type="tns:ServiceConfigRequest"  minOccurs="0" maxOccurs="1" />
+				<element name="response" type="tns:ServiceConfigResponse" minOccurs="0" maxOccurs="1" />
+			</sequence>
+			</extension>
+		</complexContent>	
+	</complexType>
+	
+	<complexType name="ServiceAction">
+		<sequence>
+			<element name="selector" type="tns:GrpAttrPairList" minOccurs="0" maxOccurs="1" />
+			<element name="action"   type="string" minOccurs="0" maxOccurs="1" />
+		</sequence>
+	</complexType>
+	
+	<complexType name="ServiceActionRequest">
+		<sequence>
+			<element name="actions"   type="tns:ServiceAction" minOccurs="0" maxOccurs="unbounded" />
+		</sequence>
+	</complexType>
+
+	<complexType name="ServiceActionResponse">
+		<sequence>
+			<element name="info" type="string" minOccurs="0" maxOccurs="unbounded" />
+		</sequence>
+	</complexType>
+	
+	<complexType name="ServiceActionCall">
+		<complexContent>
+			<extension base="tns:ServiceCall">
+			<sequence>
+				<element name="request"  type="tns:ServiceActionRequest" minOccurs="0" maxOccurs="1" />
+				<element name="response" type="tns:ServiceActionResponse" minOccurs="0" maxOccurs="1" />
+			</sequence>
+			</extension>
+		</complexContent>
+	</complexType>
+	
+	<element name="getServiceStatus" type="tns:ServiceStatusCall" />
+	<element name="getServiceConfig" type="tns:ServiceConfigCall" />
+</schema>

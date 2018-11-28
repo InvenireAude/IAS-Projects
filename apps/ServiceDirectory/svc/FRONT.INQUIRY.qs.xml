@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spec:specification
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:spec="http://www.invenireaude.org/qsystem/workers/spec"
+  xmlns:io="http://www.invenireaude.org/qsystem/workers/io"
+  xmlns:ec="http://www.invenireaude.org/qsystem/workers/ec"
+  xmlns:logic="http://www.invenireaude.org/qsystem/workers/logic"
+  xsi:type="spec:Specification">
+
+   <inputSpec>
+     <inputs xsi:type="io:ConsumerInput"
+     			inputName="input"
+     			responderName="output">
+       <connection alias="front-end"/>
+       <destination>any</destination>
+       <txnMode>NONTXN</txnMode>
+       <timeout>-1</timeout>
+	 </inputs>
+
+     <inputs xsi:type="io:BrowserInput"
+     			inputName="esbsd.apps"
+     			autoRecycle="next">
+       <connection>
+         <protocol>dir</protocol>
+         <host>localhost</host>
+       </connection>
+       <destination>${IAS_ESBSD}/apps</destination>
+       <txnMode>TXN</txnMode>
+       <timeout>0</timeout>
+	 </inputs>
+
+    <inputs xsi:type="io:BrowserInput"
+     			inputName="esbsd.ints"
+     			autoRecycle="next">
+       <connection>
+         <protocol>dir</protocol>
+         <host>localhost</host>
+       </connection>
+       <destination>${IAS_ESBSD}/interfaces</destination>
+       <txnMode>NONTXN</txnMode>
+       <timeout>0</timeout>
+	 </inputs>
+
+  </inputSpec>
+
+  <outputSpec>
+
+     <outputs xsi:type="io:ProducerOutput" outputName="error">
+        <connection>
+         <protocol>file</protocol>
+         <host>localhost</host>
+       </connection>
+       <destination>stdout_fmt</destination>
+       <txnMode>NONTXN</txnMode>
+	 </outputs>
+
+  </outputSpec>
+
+<ecSpec>
+  <ecs xsi:type="ec:SimpleEventCounter" name="ec.timer">
+   <connection alias="ec.timer"/>
+   <size>1024</size>
+   <avgKeyLen>64</avgKeyLen>
+   <resetInterval>9999999</resetInterval>
+  </ecs>
+ </ecSpec>
+
+  <logicSpec>
+    <logics xsi:type="logic:MatchExecute">
+       <load>ias::esbsd::web::dm::getTypeInfo</load>
+       <load>ias::esbsd::web::dm::getTypes</load>
+       <load>ias::esbsd::web::dm::getNamespaces</load>
+
+       <load>ias::esbsd::web::script::getPrograms</load>
+
+       <load>ias::esbsd::web::esb::getApplications</load>
+       <load>ias::esbsd::web::esb::getInterfaces</load>
+
+       <load>ias::esbsd::web::adhoc::executeProgram</load>
+
+       <load>ias::esbsd::web::qs::getStatistics</load>
+       <load>ias::esbsd::web::qs::previewMessages</load>
+
+       <load>ias::esbsd::web::broker::getBrokerStats</load>
+
+    </logics>
+  </logicSpec>
+
+  <mode>server</mode>
+</spec:specification>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spec:specification
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:spec="http://www.invenireaude.org/qsystem/workers/spec"
+  xmlns:io="http://www.invenireaude.org/qsystem/workers/io"
+  xmlns:ec="http://www.invenireaude.org/qsystem/workers/ec"
+  xmlns:logic="http://www.invenireaude.org/qsystem/workers/logic"
+  xsi:type="spec:Specification">
+
+   <inputSpec>
+   </inputSpec>
+
+  <outputSpec>
+     <outputs xsi:type="io:ProducerOutput" outputName="error">
+        <connection>
+         <protocol>file</protocol>
+         <host>localhost</host>
+       </connection>
+       <destination>stdout_fmt</destination>
+       <txnMode>NONTXN</txnMode>
+	 </outputs>
+  </outputSpec>
+
+<datasourceSpec>
+    <datasources name="ds.broker.stats">
+      <connection alias="ds.broker.stats">
+      </connection>
+    </datasources>
+  </datasourceSpec>
+
+<ecSpec>
+  <ecs xsi:type="ec:SimpleEventCounter" name="ec.timer">
+   <connection alias="ec.timer"/>
+   <size>1024</size>
+   <avgKeyLen>64</avgKeyLen>
+   <resetInterval>9999999</resetInterval>
+  </ecs>
+ </ecSpec>
+
+  <logicSpec>
+    <logics xsi:type="logic:DaemonExecute" wakeUpInterval="60000">
+       <load>ias::esbsd::svc::job::updateBrokerStatsDB</load>
+    </logics>
+  </logicSpec>
+
+  <mode>server</mode>
+</spec:specification>

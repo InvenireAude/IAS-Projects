@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ns0:specification
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:ns0="http://www.invenireaude.org/qsystem/workers/spec"
+  xsi:type="ns0:Registry">
+
+   <io>
+
+       <connections alias="front-end">
+       	 <protocol>fcgi</protocol>
+         <host>localhost</host>
+       </connections>
+
+       <connections alias="front-end-old">
+         <protocol>asrvhttp</protocol>
+         <host>localhost</host>
+         <port>55100</port>
+       </connections>
+
+   </io>
+
+    <ds>
+     <connections alias="ds.broker.stats">
+         <protocol>postgresql</protocol>
+         <user>albert</user>
+         <password>alamakota</password>
+         <location>test</location>
+     </connections>
+   </ds>
+
+</ns0:specification>

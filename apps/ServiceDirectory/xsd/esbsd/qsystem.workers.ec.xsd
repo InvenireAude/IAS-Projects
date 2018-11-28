@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsi:schema
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema"
+ targetNamespace="http://www.invenireaude.org/qsystem/workers/ec"
+ xmlns:ec="http://www.invenireaude.org/qsystem/workers/ec">
+
+
+  <!-- Some types used in external interfaces -->
+  <xsi:complexType name="Record">
+  	<xsi:sequence>
+  	  <xsi:element name="key"   type="xsi:string"  minOccurs="1" maxOccurs="1"/>
+  	  <xsi:element name="count" type="xsi:integer" minOccurs="0" maxOccurs="1"/>
+  	  <xsi:element name="avg"   type="xsi:integer" minOccurs="0" maxOccurs="1"/>
+  	  <xsi:element name="min"   type="xsi:integer" minOccurs="0" maxOccurs="1"/>
+  	  <xsi:element name="max"   type="xsi:integer" minOccurs="0" maxOccurs="1"/>
+  	  <xsi:element name="total" type="xsi:integer" minOccurs="0" maxOccurs="1"/>
+  	</xsi:sequence>
+ </xsi:complexType>
+
+
+
+</xsi:schema>

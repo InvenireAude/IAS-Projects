@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsi:schema
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema"
+ targetNamespace="http://www.invenireaude.com/esbsd/all">
+
+ <xsi:import namespace="http://www.invenireaude.com/esbsd"
+             schemaLocation="esbsd/esbsd.xsd"/>
+
+ <xsi:import namespace="http://www.invenireaude.com/esbsd/dm/api"
+             schemaLocation="esbsd/dm/api.xsd"/>
+
+ <xsi:import namespace="http://www.invenireaude.com/esbsd/esb/api"
+             schemaLocation="esbsd/esb/api.xsd"/>
+
+ <xsi:import namespace="http://www.invenireaude.com/esbsd/lang/api"
+             schemaLocation="esbsd/lang/api.xsd"/>
+
+ <xsi:import namespace="http://www.invenireaude.com/esbsd/qs/api"
+             schemaLocation="esbsd/qs/api.xsd"/>
+
+ <xsi:import namespace="http://www.invenireaude.com/esbsd/broker/api"
+             schemaLocation="esbsd/broker/api.xsd"/>
+
+</xsi:schema>
