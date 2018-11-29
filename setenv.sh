@@ -16,7 +16,9 @@ IAS_ALL_APPS_DIRS="${IAS_BASEDIR}/*/apps"
 echo $IAS_ALL_COMMON_DIRS
 
 discover(){
-result=`find $* -name ${1} 2>/dev/null | tr '\n' : | sed 's/:$//'`
+fname=${1}
+shift
+result=`find $* -name ${fname} 2>/dev/null | tr '\n' : | sed 's/:$//'`
 echo $result
 }
 
