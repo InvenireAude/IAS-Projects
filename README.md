@@ -1,2 +1,3 @@
 # IAS-Projects
-Base IAS projects for a solution build. This is NOT IAS software but the common part or a starting point of a typical application.
+Base IAS projects for a solution build. 
+This is NOT the IAS software but a common part or just starting point of your next ESB solution.
