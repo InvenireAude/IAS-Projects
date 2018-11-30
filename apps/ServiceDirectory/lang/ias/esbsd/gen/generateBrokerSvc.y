@@ -168,14 +168,14 @@ BEGIN
 			 resetInterval=9999999;
   	  	  END;
 
-  	 	  cfg.logicSpec.logics = NEW ExplicitExecute : "http://www.invenireaude.org/qsystem/workers/logic" BEGIN
+  	 	  cfg.logicSpec.logics = NEW MatchExecute : "http://www.invenireaude.org/qsystem/workers/logic" BEGIN
   	  		 name = "request";
   	  		 instances = 1;
   	  		 input = "input";
   	  		 output = "output";
   	  		 error = "error";
   	  		 load = "esb::broker::interface::"+std::str2lower(ci.id)+"::handleRequest";
-  	  		 run = COPYOF(load);
+  	  		 //run = COPYOF(load);
   	  	  END;
 
 

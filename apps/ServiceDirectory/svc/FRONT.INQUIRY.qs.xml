@@ -83,6 +83,8 @@
 
        <load>ias::esbsd::web::broker::getBrokerStats</load>
 
+       <load>ias::esbsd::web::smgr::callServiceManager</load>
+
     </logics>
   </logicSpec>
 
