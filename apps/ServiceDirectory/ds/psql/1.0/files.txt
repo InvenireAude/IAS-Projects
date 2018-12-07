@@ -1,0 +1,10 @@
+
+# Tables
+FILE=tb/ServiceCall
+FILE=tb/ServiceContent
+
+# Views
+FILE=vw/VW_ServiceCall
+FILE=vw/VW_ServiceContent
+FILE=vw/VW_ServiceResponse
+FILE=vw/VW_ServiceRequest

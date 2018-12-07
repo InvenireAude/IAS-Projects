@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsi:schema
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema"
+ targetNamespace="http://www.invenireaude.com/esbsd/collect/api"
+ xmlns:c="http://www.invenireaude.com/esbsd/collect/api">
+
+   <xsi:complexType name="MetaData">
+      <xsi:sequence>
+
+         <xsi:element name="refId"      type="xsi:string"   minOccurs="0" maxOccurs="1"/>
+         <xsi:element name="msgType"    type="xsi:string"   minOccurs="0" maxOccurs="1"/>
+         <xsi:element name="interface"  type="xsi:string"   minOccurs="0" maxOccurs="1"/>
+         <xsi:element name="service"    type="xsi:string"   minOccurs="0" maxOccurs="1"/>
+         <xsi:element name="srcAppl"    type="xsi:string"   minOccurs="0" maxOccurs="1"/>
+         <xsi:element name="dstAppl"    type="xsi:string"   minOccurs="0" maxOccurs="1"/>
+         <xsi:element name="tsBegin"    type="xsi:dateTime" minOccurs="0" maxOccurs="1"/>
+         <xsi:element name="svcTime"    type="xsi:integer"  minOccurs="0" maxOccurs="1"/>
+      </xsi:sequence>
+   </xsi:complexType>
+
+   <xsi:complexType name="Selector">
+      <xsi:sequence>
+         <xsi:element name="refId"         type="xsi:string"   minOccurs="0" maxOccurs="1"/>
+         <xsi:element name="interface"     type="xsi:string"   minOccurs="0" maxOccurs="1"/>
+         <xsi:element name="service"       type="xsi:string"   minOccurs="0" maxOccurs="1"/>
+         <xsi:element name="srcAppl"       type="xsi:string"   minOccurs="0" maxOccurs="1"/>
+         <xsi:element name="dstAppl"       type="xsi:string"   minOccurs="0" maxOccurs="1"/>
+         <xsi:element name="tsBeginTo"     type="xsi:datetime" minOccurs="0" maxOccurs="1"/>
+         <xsi:element name="tsBeginFrom"   type="xsi:datetime" minOccurs="0" maxOccurs="1"/>
+         <xsi:element name="svcTimeTo"     type="xsi:integer"  minOccurs="0" maxOccurs="1"/>
+         <xsi:element name="svcTimeFrom"   type="xsi:integer"  minOccurs="0" maxOccurs="1"/>
+      </xsi:sequence>
+   </xsi:complexType>
+
+   <xsi:complexType name="ContentSelector">
+      <xsi:sequence>
+         <xsi:element name="refId"        type="xsi:string"   minOccurs="0" maxOccurs="1"/>
+         <xsi:element name="tsBegin"      type="xsi:datetime" minOccurs="0" maxOccurs="1"/>
+      </xsi:sequence>
+   </xsi:complexType>
+
+   <xsi:complexType name="GetMessageHistory">
+      <xsi:sequence>
+         <xsi:element name="selector"      type="c:Selector"   minOccurs="0" maxOccurs="1"/>
+         <xsi:element name="messages"      type="c:MetaData"   minOccurs="0" maxOccurs="unbounded"/>
+      </xsi:sequence>
+   </xsi:complexType>
+
+   <xsi:complexType name="GetMessageContent">
+      <xsi:sequence>
+         <xsi:element name="selector"      type="c:ContentSelector"   minOccurs="0" maxOccurs="1"/>
+         <xsi:element name="request"       type="xsi:string"          minOccurs="0" maxOccurs="1"/>
+         <xsi:element name="response"      type="xsi:string"          minOccurs="0" maxOccurs="1"/>
+      </xsi:sequence>
+   </xsi:complexType>
+
+  </xsi:schema>
+
