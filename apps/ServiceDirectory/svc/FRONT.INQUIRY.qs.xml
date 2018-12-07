@@ -65,6 +65,14 @@
   </ecs>
  </ecSpec>
 
+  <datasourceSpec>
+    <datasources name="ds.broker.collect">
+      <connection alias="ds.broker.collect">
+      </connection>
+      <objectFormatter>JSON</objectFormatter>
+    </datasources>
+  </datasourceSpec>
+
   <logicSpec>
     <logics xsi:type="logic:MatchExecute">
        <load>ias::esbsd::web::dm::getTypeInfo</load>
@@ -84,6 +92,9 @@
        <load>ias::esbsd::web::broker::getBrokerStats</load>
 
        <load>ias::esbsd::web::smgr::callServiceManager</load>
+
+       <load>ias::esbsd::web::collect::getMessageContent</load>
+       <load>ias::esbsd::web::collect::getMessageHistory</load>
 
     </logics>
   </logicSpec>

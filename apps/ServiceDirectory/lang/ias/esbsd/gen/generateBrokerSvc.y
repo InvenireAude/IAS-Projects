@@ -87,7 +87,7 @@ BEGIN
   	  	   END;
 
   	   cfg.outputSpec.outputs = NEW ProducerOutput : "http://www.invenireaude.org/qsystem/workers/io" BEGIN
-		 outputName = "output.collect";
+		 outputName = "output.esb.collect";
    		 connection.alias = ci.deployment.location.connectionAlias;
    		 destination = "ESB.C.COLLECT.OUT";
    		 txnMode = "NONTXN";
@@ -175,6 +175,7 @@ BEGIN
   	  		 output = "output";
   	  		 error = "error";
   	  		 load = "esb::broker::interface::"+std::str2lower(ci.id)+"::handleRequest";
+           parseDM = FALSE;
   	  		 //run = COPYOF(load);
   	  	  END;
 
@@ -243,6 +244,7 @@ BEGIN
   	  		 output = "output.reply";
   	  		 error = "error.reply";
   	  		 load = "esb::broker::interface::"+std::str2lower(ci.id)+"::handleReply";
+           parseDM = FALSE;
   	  		 run = COPYOF(load);
   	  	  END;
 

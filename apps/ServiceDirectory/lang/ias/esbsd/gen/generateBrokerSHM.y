@@ -31,9 +31,15 @@ BEGIN
       VAR qmgr AS String;
       qmgr = ias::esbsd::gen::inc::getQMGRName(registry, i.deployment.location.connectionAlias);
 
-      IF NOT ISSET(systems[[ qmgr ]]) THEN
+      IF NOT ISSET(systems[[ qmgr ]]) THEN BEGIN
+
        CREATE systems BEGIN
          name = qmgr;
+       END;
+
+       	ias::esbsd::gen::inc::shm::defInErr(systems[[ qmgr ]], "ESB.S.COLLECT");
+      	ias::esbsd::gen::inc::shm::defAlias(systems[[ qmgr ]], "ESB.C.COLLECT", "ESB.S.COLLECT", "NO");
+
        END;
 
     END;
@@ -101,17 +107,6 @@ BEGIN
   		END;
 
 
-  WITH ca AS apps.applications DO
-   IF ca.id == "SHA" THEN
-   	WITH ci AS ca.interfaceInstances DO
-   	 IF ci.id == "COLLECT" THEN BEGIN
-   		VAR qmgr AS String;
-		   qmgr = ias::esbsd::gen::inc::getQMGRName(registry, ci.deployment.location.connectionAlias);
-
-    	ias::esbsd::gen::inc::shm::defInErr(systems[[ qmgr ]], ca.id +".S.COLLECT.IN");
-    	ias::esbsd::gen::inc::shm::defAlias(systems[[ qmgr ]], "ESB.C.COLLECT", ca.id +".S.COLLECT", "NO");
-   END;
-
   WITH s AS systems DO BEGIN
 
     WITH s DO BEGIN
@@ -139,7 +134,7 @@ BEGIN
 
     SORT s.actions USING ias::esbsd::gen::inc::shm::compareAction;
 
-    std::save("stdout",s);
+  //  std::save("stdout",s);
     VAR ctx   AS Context  : "http://www.invenireaude.org/qsystem/workers";
     ctx.MID = s.name;
     std::send("output",ctx,s);

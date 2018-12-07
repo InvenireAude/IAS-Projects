@@ -61,6 +61,19 @@
 		<resGrp>rg.ias.servicedirectory.svc.job</resGrp>
    </services>
 
+  <services name="ias.servicedirectory.svc.collect">
+	   <grpAttrs name="type" value="svc" />
+	   <grpAttrs name="mon"  value="yes" />
+	   <grpAttrs name="appl" value="ias.sd" />
+	   <startCmd>
+			<exe>ias_qs_processor</exe>
+			<args>-f</args>
+			<args>svc/svc.COLLECT.qs.xml</args>
+			<args>-T</args>
+			<args>1</args>
+		</startCmd>
+		<resGrp>rg.ias.servicedirectory.svc.collect</resGrp>
+   </services>
 
 </ns0:serviceConfig>
 

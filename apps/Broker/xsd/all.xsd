@@ -6,5 +6,4 @@
 <xsi:import namespace="http://www.invenireaude.com/esbsd"
              schemaLocation="../../ServiceDirectory/xsd/esbsd/esbsd.xsd"/>
 
-
 </xsi:schema>

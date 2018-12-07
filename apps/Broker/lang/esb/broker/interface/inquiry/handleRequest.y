@@ -2,7 +2,7 @@
 IMPORT esb::broker::interface::common::handleRequest;
 
 PROGRAM esb::broker::interface::inquiry::handleRequest(VAR ctx   AS Context  : "http://www.invenireaude.org/qsystem/workers",
-		   	   		  							   VAR data  AS Service  : "http://www.invenireaude.com/esbsd/services/common")
+		   	   		  					      		                  VAR data AS Routing  : "http://www.invenireaude.org/qsystem/workers")
 BEGIN
 
   esb::broker::interface::common::handleRequest(ctx,data);

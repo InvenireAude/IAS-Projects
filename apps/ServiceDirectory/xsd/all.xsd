@@ -12,6 +12,9 @@
  <xsi:import namespace="http://www.invenireaude.com/esbsd/esb/api"
              schemaLocation="esbsd/esb/api.xsd"/>
 
+ <xsi:import namespace="http://www.invenireaude.com/esbsd/collect/api"
+             schemaLocation="esbsd/collect/api.xsd"/>
+
  <xsi:import namespace="http://www.invenireaude.com/esbsd/lang/api"
              schemaLocation="esbsd/lang/api.xsd"/>
 
