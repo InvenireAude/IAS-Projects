@@ -1,5 +1,6 @@
 CREATE TABLE ServiceCall (
      refId     VARCHAR(64) NOT NULL
+  ,  parentId  VARCHAR(64) NULL
   ,  tsBegin   TIMESTAMP NULL
   ,  svcTime   NUMERIC NULL
   ,  service   VARCHAR(64) NOT NULL

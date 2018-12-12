@@ -8,6 +8,7 @@
       <xsi:sequence>
 
          <xsi:element name="refId"      type="xsi:string"   minOccurs="0" maxOccurs="1"/>
+         <xsi:element name="parentId"   type="xsi:string"   minOccurs="0" maxOccurs="1"/>
          <xsi:element name="msgType"    type="xsi:string"   minOccurs="0" maxOccurs="1"/>
          <xsi:element name="interface"  type="xsi:string"   minOccurs="0" maxOccurs="1"/>
          <xsi:element name="service"    type="xsi:string"   minOccurs="0" maxOccurs="1"/>
@@ -18,9 +19,17 @@
       </xsi:sequence>
    </xsi:complexType>
 
+   <xsi:complexType name="Paging">
+      <xsi:sequence>
+         <xsi:element name="pageSize"      type="xsi:integer"  minOccurs="0" maxOccurs="1"/>
+         <xsi:element name="pageOffset"    type="xsi:integer"  minOccurs="0" maxOccurs="1"/>
+      </xsi:sequence>
+   </xsi:complexType>
+
    <xsi:complexType name="Selector">
       <xsi:sequence>
          <xsi:element name="refId"         type="xsi:string"   minOccurs="0" maxOccurs="1"/>
+         <xsi:element name="parentId"      type="xsi:string"   minOccurs="0" maxOccurs="1"/>
          <xsi:element name="interface"     type="xsi:string"   minOccurs="0" maxOccurs="1"/>
          <xsi:element name="service"       type="xsi:string"   minOccurs="0" maxOccurs="1"/>
          <xsi:element name="srcAppl"       type="xsi:string"   minOccurs="0" maxOccurs="1"/>
@@ -29,6 +38,7 @@
          <xsi:element name="tsBeginFrom"   type="xsi:datetime" minOccurs="0" maxOccurs="1"/>
          <xsi:element name="svcTimeTo"     type="xsi:integer"  minOccurs="0" maxOccurs="1"/>
          <xsi:element name="svcTimeFrom"   type="xsi:integer"  minOccurs="0" maxOccurs="1"/>
+         <xsi:element name="paging"        type="c:Paging"     minOccurs="0" maxOccurs="1"/>
       </xsi:sequence>
    </xsi:complexType>
 

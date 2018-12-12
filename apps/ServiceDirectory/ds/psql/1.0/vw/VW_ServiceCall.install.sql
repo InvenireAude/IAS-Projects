@@ -1,6 +1,7 @@
 CREATE VIEW VW_ServiceCall AS
  SELECT
      refId
+   , parentId
    , tsBegin
    , svcTime
    , service
@@ -18,6 +19,7 @@ BEGIN
 
   INSERT INTO ServiceCall(
      refId
+   , parentId
    , tsBegin
    , svcTime
    , service
@@ -26,6 +28,7 @@ BEGIN
    , dstAppl
   )VALUES(
      NEW.refId
+   , NEW.parentId
    , NEW.tsBegin
    , NEW.svcTime
    , NEW.service
@@ -35,6 +38,7 @@ BEGIN
    ) ON CONFLICT(tsBegin, refId) DO UPDATE
    SET
      svcTime   = NEW.svcTime
+   , parentId  = NEW.parentId
    , service = NEW.service
    , interface = NEW.interface
    , srcAppl = NEW.srcAppl

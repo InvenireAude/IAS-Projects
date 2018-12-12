@@ -70,12 +70,12 @@ BEGIN
   	     override = TRUE;
   	   END;
 
-  	   CREATE attrUpdates BEGIN
+  	 /*   CREATE attrUpdates BEGIN
   	     name = "FMT";
   	     value = "XML";
   	     override = TRUE;
   	   END;
-
+ */
   	  END;
 
 
@@ -91,11 +91,11 @@ BEGIN
    		 connection.alias = ci.deployment.location.connectionAlias;
    		 destination = "ESB.C.COLLECT.OUT";
    		 txnMode = "NONTXN";
-   		 CREATE attrUpdates BEGIN
+   	/* 	 CREATE attrUpdates BEGIN
   	     	name = "FMT";
   	     	value = "XML";
   	     	override = TRUE;
-  	   	END;
+  	   	END; */
  	   END;
 
   	   IF ias::esbsd::gen::inc::getInterface(ints, ci.id).mode == "ClientServer___NO_STATUS_QUEUE" THEN BEGIN
@@ -107,12 +107,12 @@ BEGIN
   	   		 timeout = 0;
   	   		 txnMode = "TXN";
 
-  	   		 CREATE attrUpdates BEGIN
+  	/*    		 CREATE attrUpdates BEGIN
   	     		name = "FMT";
   	     		value = "XML";
   	     		override = TRUE;
   	   		END;
-
+ */
   	  	   END;
 
   	  	   cfg.outputSpec.outputs = NEW ProducerOutput : "http://www.invenireaude.org/qsystem/workers/io" BEGIN
@@ -253,12 +253,12 @@ BEGIN
   	   		 connection.alias = ci.deployment.location.connectionAlias;
   	   		 destination = "ESB.C."+ca.id+"."+ci.id+".IN";
   	   		 timeout = -1;
-
+/*
   	   		 CREATE attrUpdates BEGIN
   	     		name = "FMT";
   	     		value = "XML";
   	     		override = TRUE;
-  	   		END;
+  	   		END; */
 
   	  	   END;
 

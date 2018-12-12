@@ -19,7 +19,7 @@ BEGIN
     WITH a AS ctx.attributes DO
       IF a.name == "INTERFACE" THEN
         interface = a.value
-    ELSE IF a.name == "TYPE" THEN
+    ELSE IF a.name == "XMLfName" THEN
         service = a.value
     ELSE IF a.name == "SRCAPPL" THEN
         srcAppl = a.value

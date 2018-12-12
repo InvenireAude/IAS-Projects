@@ -1,14 +1,14 @@
 /*
  * File: ZZZ-DemoCep/lang/std/default.y
- * 
+ *
  * Copyright (C) 2015, Albert Krzymowski
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  * http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -38,15 +38,20 @@ PROGRAM std::replace(VAR strArgument AS String,
 					 VAR strNewText  AS String) RETURNS String
 EXTERNAL "libIASLangLib:Replace"();
 
+PROGRAM std::partOfString(VAR strArgument AS String,
+				                  VAR strPattern  AS String,
+				                  VAR iFieldNo    AS Integer) RETURNS String
+EXTERNAL "libIASLangLib:PartOfString"();
+
 PROGRAM std::replaceRegExp(VAR strArgument AS String,
 					        VAR strPattern  AS String,
-					        VAR strNewText  AS String) RETURNS String					        
+					        VAR strNewText  AS String) RETURNS String
 EXTERNAL "libIASLangLib:ReplaceRegExp"();
 
-PROGRAM std::str2lower(VAR strArgument AS String) RETURNS String
+PROGRAM std::toLower(VAR strArgument AS String) RETURNS String
 EXTERNAL "libIASLangLib:StrToLower"();
 
-PROGRAM std::str2upper(VAR strArgument AS String) RETURNS String
+PROGRAM std::toUpper(VAR strArgument AS String) RETURNS String
 EXTERNAL "libIASLangLib:StrToUpper"();
 
 PROGRAM std::strlen(VAR strArgument AS String) RETURNS Integer
@@ -195,7 +200,7 @@ EXTERNAL "libIASLangLib:Base64ToBinary"();
 PROGRAM std::toBase64(VAR bData AS Raw)
 RETURNS String
 EXTERNAL "libIASLangLib:BinaryToBase64"();
- 
+
 PROGRAM std::fromHex(VAR strArgument AS String)
 RETURNS Raw
 EXTERNAL "libIASLangLib:HexToBinary"();
@@ -205,7 +210,7 @@ RETURNS String
 EXTERNAL "libIASLangLib:BinaryToHex"();
 
 /* ******************* DO ZASTAPIENIA LEPSZA IMPLEMENTACJA ************************* */
-PROGRAM std::ltrim(VAR strArgument AS String) 
+PROGRAM std::ltrim(VAR strArgument AS String)
 RETURNS String
 BEGIN
 	VAR pos AS Integer;
@@ -213,15 +218,15 @@ BEGIN
 
 	WHILE std::substring(strArgument,pos,1) == " " DO
 		pos = pos+1;
-	
+
 	IF pos > 0 THEN
-		RETURN std::substring(strArgument, pos)	
-	ELSE 
+		RETURN std::substring(strArgument, pos)
+	ELSE
 		RETURN strArgument;
 
 END;
 
-PROGRAM std::rtrim(VAR strArgument AS String) 
+PROGRAM std::rtrim(VAR strArgument AS String)
 RETURNS String
 BEGIN
 	VAR pos AS Integer;
@@ -229,10 +234,10 @@ BEGIN
 
 	len = std::strlen(strArgument);
 	pos = len-1;
-	
+
 	WHILE pos >= 0 AND std::substring(strArgument,pos,1) == " " DO
 		pos = pos-1;
-	
+
 	IF pos < (len-1) THEN
 		RETURN std::substring(strArgument, 0, pos+1)
 	ELSE
@@ -240,7 +245,7 @@ BEGIN
 
 END;
 
-PROGRAM std::trim(VAR strArgument AS String) 
+PROGRAM std::trim(VAR strArgument AS String)
 RETURNS String
 BEGIN
 	RETURN std::ltrim(std::rtrim(strArgument));
@@ -266,7 +271,7 @@ BEGIN
   VAR l AS Integer;
   i = 0;
 
-  WHILE i < std::strlen(strValue) AND (i < maxLength) DO BEGIN    
+  WHILE i < std::strlen(strValue) AND (i < maxLength) DO BEGIN
     i = std::find(strValue, " ", i + 1);
     IF i <= maxLength THEN
       l = i
@@ -285,32 +290,32 @@ BEGIN
 
   VAR i AS Integer;
   i = 0;
-  
+
   WHILE i <= std::strlen(s) DO BEGIN
 
     std::save("stdout",i);
-  
+
     VAR n AS Integer;
     n = std::find(s,d,i);
-    
+
     IF n == -1 THEN
       n = std::strlen(s);
-    
+
     result = std::substring(s, i, n - i);
-    
+
     i = n + std::strlen(d);
   END;
-  
+
 END;
 
 
 PROGRAM std::contains(VAR l AS ARRAY OF String, VAR v AS String)
 RETURNS Boolean
 BEGIN
-  
+
   WITH s AS l DO
-    IF v == s THEN 
+    IF v == s THEN
     	RETURN TRUE;
-    
+
     RETURN FALSE;
 END;

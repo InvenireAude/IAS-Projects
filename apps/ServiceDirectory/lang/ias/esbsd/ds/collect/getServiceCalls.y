@@ -6,7 +6,7 @@ EXTERNAL "libIASQSystemLib:ias_qs_lang_db_proxy:WrappedStatement"
 (
 "ds.broker.collect",
 "
-SELECT ARRAY INTO result
+SELECT ARRAY INTO result PAGE(selector.paging.pageOffset, selector.paging.pageSize)
     refId      => refId
   , interface  => interface
   , service    => service
@@ -18,5 +18,9 @@ FROM VW_ServiceCall
 WHERE
   tsBegin <= selector.tsBeginTo   AND
   tsBegin >= selector.tsBeginFrom AND
-? refId    = selector.refId
+? srcAppl   = selector.srcAppl    AND
+? dstAppl   = selector.dstAppl    AND
+? interface = selector.interface  AND
+? service   = selector.service    AND
+? refId     = selector.refId
 ");

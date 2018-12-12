@@ -10,8 +10,13 @@ RETURNS GetMessageHistory : "http://www.invenireaude.com/esbsd/collect/api"
 BEGIN
 
 
-  IF ISSET(msg.selector) THEN
+  IF ISSET(msg.selector) THEN BEGIN
+    CREATE msg.selector.paging BEGIN
+      pageSize = (pageSize OR 50);
+      pageOffset = (pageOffset OR 0);
+    END;
     msg.messages = ias::esbsd::ds::collect::getServiceCalls(msg.selector);
+  END;
 
   RETURN msg;
 END;

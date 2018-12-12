@@ -10,7 +10,7 @@
 	   <grpAttrs name="mon"  value="yes" />
 	   <grpAttrs name="appl"  value="ias.sd" />
 	   <startCmd>
-			<exe>bin/fcgi_processor.sh</exe>
+			<exe>fcgi_processor.sh</exe>
 			<args>esbsd.api.inquiry</args>
 			<args>-f</args>
 			<args>svc/FRONT.INQUIRY.qs.xml</args>
@@ -37,7 +37,7 @@
 	   <grpAttrs name="mon"  value="yes" />
 	   <grpAttrs name="appl" value="ias.tester" />
 	   <startCmd>
-			<exe>bin/fcgi_processor.sh</exe>
+			<exe>fcgi_processor.sh</exe>
 			<args>esbsd.api.tester</args>
 			<args>-f</args>
 			<args>svc/tester.qs.xml</args>
