@@ -46,8 +46,8 @@ echo Preparing: ${f}.${mode}.sql
 cat ${f}.${mode}.sql >> ${_LOGS_DIR}/script.$$.sql
 done
 
-echo $*
-cat ${_LOGS_DIR}/script.$$.sql
+#echo $*
+#cat ${_LOGS_DIR}/script.$$.sql
 psql $* < ${_LOGS_DIR}/script.$$.sql
 
 done
