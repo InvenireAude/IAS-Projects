@@ -60,7 +60,7 @@ EXTERNAL "libIASLangLib:StrLen"();
 /* ********************************************************************************* */
 
 PROGRAM std::log(VAR priority AS String, VAR message AS String)
-EXTERNAL "libIASLangLib:SysLog"();
+EXTERNAL "libIASLangLib:ias_lang_std_system_proxy:SysLog"();
 
 /* ********************************************************************************* */
 
@@ -155,59 +155,59 @@ PROGRAM std::getTimeDiffMS(VAR arg1 AS DateTime,
 EXTERNAL "libIASLangLib:GetTimeDiff"();
 
 PROGRAM std::load(VAR file AS String) RETURNS AnyType
-EXTERNAL "libIASLangLib:Load"();
+EXTERNAL "libIASLangLib:ias_lang_std_system_proxy:Load"();
 
 PROGRAM std::save(VAR file AS String,
 				   VAR value  AS AnyType)
-EXTERNAL "libIASLangLib:Save"();
+EXTERNAL "libIASLangLib:ias_lang_std_system_proxy:Save"();
 
 PROGRAM std::rand() RETURNS Integer
-EXTERNAL "libIASLangLib:GetRandom"();
+EXTERNAL "libIASLangLib:ias_lang_std_math_proxy:GetRandom"();
 
 PROGRAM std::randString(VAR length AS Integer) RETURNS String
-EXTERNAL "libIASLangLib:GetRandomString"();
+EXTERNAL "libIASLangLib:ias_lang_std_math_proxy:GetRandomString"();
 
 PROGRAM std::getHash(VAR value AS String) RETURNS Integer
-EXTERNAL "libIASLangLib:GetHash"();
+EXTERNAL "libIASLangLib:ias_lang_std_security_proxy:GetHash"();
 
 PROGRAM std::sha256(VAR strArgument AS String) RETURNS String
-EXTERNAL "libIASLangLib:StrToSHA256"();
+EXTERNAL "libIASLangLib:ias_lang_std_security_proxy:StrToSHA256"();
 
 PROGRAM std::sha256(VAR bData AS Raw) RETURNS String
-EXTERNAL "libIASLangLib:BinaryToSHA256"();
+EXTERNAL "libIASLangLib:ias_lang_std_security_proxy:BinaryToSHA256"();
 
 PROGRAM std::sha1(VAR strArgument AS String) RETURNS String
-EXTERNAL "libIASLangLib:StrToSHA1"();
+EXTERNAL "libIASLangLib:ias_lang_std_security_proxy:StrToSHA1"();
 
 PROGRAM std::sha1(VAR bData AS Raw) RETURNS String
-EXTERNAL "libIASLangLib:BinaryToSHA1"();
+EXTERNAL "libIASLangLib:ias_lang_std_security_proxy:BinaryToSHA1"();
 
 PROGRAM std::md5(VAR strArgument AS String) RETURNS String
-EXTERNAL "libIASLangLib:StrToMD5"();
+EXTERNAL "libIASLangLib:ias_lang_std_security_proxy:StrToMD5"();
 
 PROGRAM std::md5(VAR bData AS Raw) RETURNS String
-EXTERNAL "libIASLangLib:BinaryToMD5"();
+EXTERNAL "libIASLangLib:ias_lang_std_security_proxy:BinaryToMD5"();
 
 PROGRAM std::readCertificate(VAR strFileName AS String) RETURNS String
-EXTERNAL "libIASLangLib:ReadCertificate"();
+EXTERNAL "libIASLangLib:ias_lang_std_security_proxy:ReadCertificate"();
 
 /* ********************************************************************************* */
 
 PROGRAM std::fromBase64(VAR strArgument AS String)
 RETURNS Raw
-EXTERNAL "libIASLangLib:Base64ToBinary"();
+EXTERNAL "libIASLangLib:ias_lang_std_security_proxy:Base64ToBinary"();
 
 PROGRAM std::toBase64(VAR bData AS Raw)
 RETURNS String
-EXTERNAL "libIASLangLib:BinaryToBase64"();
+EXTERNAL "libIASLangLib:ias_lang_std_security_proxy:BinaryToBase64"();
 
 PROGRAM std::fromHex(VAR strArgument AS String)
 RETURNS Raw
-EXTERNAL "libIASLangLib:HexToBinary"();
+EXTERNAL "libIASLangLib:ias_lang_std_security_proxy:HexToBinary"();
 
 PROGRAM std::toHex(VAR bData AS Raw)
 RETURNS String
-EXTERNAL "libIASLangLib:BinaryToHex"();
+EXTERNAL "libIASLangLib:ias_lang_std_security_proxy:BinaryToHex"();
 
 /* ******************* DO ZASTAPIENIA LEPSZA IMPLEMENTACJA ************************* */
 PROGRAM std::ltrim(VAR strArgument AS String)

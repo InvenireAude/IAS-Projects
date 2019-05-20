@@ -24,5 +24,4 @@ RETURNS String
 BEGIN
 
     RETURN (registry.io.connections[[ alias ]].host OR "");
-
 END;

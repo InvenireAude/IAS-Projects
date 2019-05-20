@@ -1,9 +1,10 @@
 #!/bin/bash
 
+mkdir -pf /tmp/nginx/client_temp
+
 script_dir=$(dirname $(readlink -f ${BASH_SOURCE}))
 export IAS_BASEDIR=$(readlink -f ${script_dir}/..)
 echo IAS_BASEDIR=$IAS_BASEDIR
-
 
 export IAS_APP_PROJECTS=${IAS_BASEDIR}/APP-Projects
 export IAS_APP_ENVIRONMENT=${IAS_BASEDIR}/APP-Environment

@@ -14,6 +14,12 @@ echo $appdir
 
 cd $base_dir
 
+if [ -e ${appfull}/SMServices.xml ]
+then
+echo Nothing to do. Exiting ...
+exit
+fi
+
 mkdir -p ${appfull}/lang
 mkdir -p ${appfull}/svc
 mkdir -p ${appfull}/sm
@@ -55,7 +61,7 @@ cat >APP-Environment/cfg/${appfull}/sm/SMDeployment.xml <<EOF
 	<refreshMS>1000</refreshMS>
 
 	<resources name="rg.app.${appbasel}.inquiry">
-	    <logDir>${IAS_SM_RUNTIME}/logs</logDir>
+	    <logDir>\${IAS_SM_RUNTIME}/logs</logDir>
 		<count>1</count>
 		<exe xsi:type="ns0:ResourceGroupExe"/>
 		 <env>
