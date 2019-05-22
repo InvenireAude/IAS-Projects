@@ -23,7 +23,12 @@ echo ===========================================================
 
 cd ${_SCRIPT_DIR}
 
-for mode in revert install
+if [ ${_MODE} == 'reinstall' ]
+then
+_MODE='revert install'
+fi
+
+for mode in ${_MODE}
 do
 
 echo
