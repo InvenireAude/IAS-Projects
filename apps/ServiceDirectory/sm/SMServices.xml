@@ -27,7 +27,7 @@
 	   <startCmd>
 			<exe>lighttpd</exe>
 			<args>-Df</args>
-			<args>lighttpd/lighttpd.cfg</args>
+			<args>lighttpd/${LIGHTTPD_CFG}</args>
 		</startCmd>
 		<resGrp>rg.ias.servicedirectory.web</resGrp>
    </services>
