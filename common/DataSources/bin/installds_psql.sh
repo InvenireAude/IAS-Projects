@@ -38,9 +38,9 @@ echo
 
 if [[ $mode == install ]]
 then
-FILES=$(grep FILE= ${_SCRIPT_DIR}/files.txt |cut -f2- -d= | tr \\n ' ')
+FILES=$(grep FILE= ${_SCRIPT_DIR}/files.txt | grep -v '#' |cut -f2- -d= | tr \\n ' ')
 else
-FILES=$(grep FILE= ${_SCRIPT_DIR}/files.txt |cut -f2- -d= | tac | tr \\n ' ')
+FILES=$(grep FILE= ${_SCRIPT_DIR}/files.txt | grep -v '#' | cut -f2- -d= | tac | tr \\n ' ')
 fi
 
 rm -f ${_LOGS_DIR}/script.$$.sql
